@@ -9,7 +9,7 @@ import os
 import glob
 import os.path as path
 
-sampling_freq, audio = wavfile.read("data/cough/18448__zippi1__sound-cough1.wav")
+sampling_freq, audio = wavfile.read("dataset1/data/cough/18448__zippi1__sound-cough1.wav")
 mfcc_features = mfcc(audio, sampling_freq)
 filterbank_features = logfbank(audio, sampling_freq)
 
@@ -21,7 +21,7 @@ print ('Length of each feature =', filterbank_features.shape[1])
 """
 
 figure = plt.figure(figsize=(20, 3))
-example_data_path = 'data/cough/'
+example_data_path = 'dataset1/data/cough/'
 file_paths = glob.glob(path.join(example_data_path, "*.wav"))
 for idx in range(0):
     sampling_freq, audio = wavfile.read(file_paths[idx])
@@ -56,7 +56,7 @@ class HMMTrainer(object):
     return self.model.score(input_data)
 
 hmm_models = []
-input_folder = 'data/'
+input_folder = 'dataset1/data/'
 # Parse the input directory
 for dirname in os.listdir(input_folder):
     # Get the name of the subfolder
@@ -90,7 +90,7 @@ for dirname in os.listdir(input_folder):
     hmm_models.append((hmm_trainer, label))
     hmm_trainer = None
 
-input_folder = 'test/'
+input_folder = 'dataset1/test/'
 real_labels = []
 pred_labels = []
 for dirname in os.listdir(input_folder):
